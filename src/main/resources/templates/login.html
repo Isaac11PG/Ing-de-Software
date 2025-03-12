@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2QBh1DoFAHgDhUuL6pGJy9PFvZVv_6_xV-A&s');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 420px;
+            padding: 20px;
+        }
+        
+        .card {
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: none;
+            overflow: hidden;
+        }
+        
+        .card-header {
+            background-color: #0d6efd;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 15px 15px 0 0 !important;
+        }
+        
+        .logo {
+            max-width: 80px;
+            margin-bottom: 10px;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-control:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        
+        .input-group-text {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .btn-primary {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+            border-radius: 8px;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0b5ed7;
+            border-color: #0a58ca;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        }
+        
+        .alert {
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: none;
+        }
+        
+        .registro-link {
+            color: #0d6efd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .registro-link:hover {
+            color: #0a58ca;
+            text-decoration: underline;
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <!-- Puedes añadir un logo aquí -->
+                <h3 class="mb-0"><i class="fas fa-user-lock me-2"></i>Iniciar Sesión</h3>
+            </div>
+            <div class="card-body">
+                <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>Credenciales inválidas. Por favor, intenta nuevamente.
+                </div>
+                
+                <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>Has cerrado sesión exitosamente.
+                </div>
+                
+                <form th:action="@{/login}" method="post">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" name="username" required autofocus placeholder="Ingresa tu nombre de usuario">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" class="form-control" name="password" required placeholder="Ingresa tu contraseña">
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me">
+                        <label class="form-check-label" for="rememberMe">Recordarme</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                    </button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p>¿No tienes cuenta? <a href="/registro" class="registro-link">Regístrate aquí</a></p>
+                    <p><a href="/recuperar-password" class="registro-link">¿Olvidaste tu contraseña?</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
